@@ -8,6 +8,8 @@ const SignUpForm = () => {
   const [age, setAge] = useState("");
   const [genderPreference, setGenderPreference] = useState("");
 
+  const loading = false;
+
   return (
     <form className="space-y-6">
       {/* NAME */}
@@ -198,11 +200,15 @@ const SignUpForm = () => {
 
       <div>
         <button
-          type="submit"
-          className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white "bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-          `}
-        >
-          Sign up
+          type='submit'
+					className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+						loading
+							? "bg-pink-400 cursor-not-allowed"
+							: "bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+					}`}
+					disabled={loading}
+				>
+					{loading ? "Signing up..." : "Sign up"}
         </button>
       </div>
     </form>
