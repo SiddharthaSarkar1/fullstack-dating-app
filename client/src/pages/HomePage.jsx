@@ -1,7 +1,13 @@
-const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+import { useAuthStore } from "../store/useAuthStore";
 
-export default HomePage
+const HomePage = () => {
+  const { logout } = useAuthStore();
+  return (
+    <div>
+      Homepage
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
+};
+
+export default HomePage;

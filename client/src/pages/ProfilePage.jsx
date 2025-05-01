@@ -1,7 +1,11 @@
+import Header from "../components/Header";
+
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
-  )
-}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+    </div>
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;
