@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Loader, MessageCircle, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useMatchStore } from "../store/useMatchStore";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
-  const loading = true;
-  const matches = true;
+  const { getMyMatches, matches, isLoadingMyMatches } = useMatchStore();
+
+  useEffect(() => {
+    getMyMatches();
+  }, [getMyMatches]);
 
   return (
     <>
@@ -33,7 +37,7 @@ const Sidebar = () => {
           </div>
 
           <div className="flex-grow overflow-y-auto p-4 z-10 relative">
-            {loading ? (
+            {isLoadingMyMatches ? (
               <LoadingState />
             ) : matches.length === 0 ? (
               <NoMatchesFound />

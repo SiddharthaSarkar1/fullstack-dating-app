@@ -87,7 +87,7 @@ export const getMatches = async (req, res) => {
 export const getUserProfiles = async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id);
-    const user = await User.find({
+    const users = await User.find({
       $and: [
         { _id: { $ne: currentUser.id } },
         { _id: { $nin: currentUser.likes } },
