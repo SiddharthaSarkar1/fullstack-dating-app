@@ -44,7 +44,7 @@ export const swipeRight = async (req, res) => {
 export const swipeLeft = async (req, res) => {
   try {
     const { dislikedUserId } = req.params;
-    const currentUser = await User.find(req.user.id);
+    const currentUser = await User.findById(req.user.id);
 
     if (!currentUser.dislikes.includes(dislikedUserId)) {
       currentUser.dislikes.push(dislikedUserId);
