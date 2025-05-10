@@ -4,6 +4,7 @@ import connectDB from "./config/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { createServer } from "http";
+import path from "path";
 
 //Routes
 import authRoutes from "./routes/authRoutes.js";
@@ -19,6 +20,8 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 const httpServer = createServer(app);
 
+const __dirname = path.resolve();
+
 initializeSocket(httpServer);
 
 app.use(express.json());
@@ -33,6 +36,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/matches", matchRoutes);
 app.use("/api/messages", messageRoutes);
+
+if(process.env.NODE_ENV  === 'production'){
+  app.use(express.static(path.join(__dirname, '/client/dist')))
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"))
+  })
+}
 
 httpServer.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
